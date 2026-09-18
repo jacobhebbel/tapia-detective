@@ -2,63 +2,90 @@
 
 The character dictionary has this structure:
 
-    character_name -> [role, current_location, trusts, personality]
+    character_name -> [role, time_of_death_room, trusts, personality, alibi_evidence]
 
 ``trusts`` is itself a dictionary. It starts empty so every character begins
 the story trusting no one.
+
+``time_of_death_room`` doubles as where a character's game-loop Agent starts
+(see ``agents.build_agents``) -- it's also the room used to work out alibis:
+whoever shared a room with another living character at the time of death has
+a witness and is cleared; whoever was alone has no witness and can't be
+ruled out. The killer must always be placed alone (or alone with the
+victim) so that room logic alone never gives them away.
 """
 
 from House_Generator import generate_house
 
-# 
-
-
-
-
 # Add or remove characters here. Each entry is:
-# (character name, role, preferred starting room, personality description)
+# (character name, role, time-of-death room, personality, alibi evidence)
+#
+# The room must be a real room in House_Generator.STATIC_HOUSE (Corridor,
+# Living Room, Kitchen, Bedroom, Bathroom). Anything else silently falls back
+# to "Corridor" in _starting_location(), which used to collapse the whole
+# cast into one room -- so keep these in sync with the static map.
+#
+# ``alibi_evidence`` is only used for characters with no living witness (see
+# above): for an innocent suspect it's the concrete, checkable detail they'll
+# offer if pressed, which is what should let a careful player tell them apart
+# from the killer; for the killer it's the false claim they'll make instead.
 CHARACTER_DEFINITIONS = [
     (
         "Ignatius Vance",
         "Victim / puzzle magnate",
-        "Study",
+        "Living Room",
         "Wealthy, controlling, and secretive.",
+        "",
     ),
     (
         "Dr. Teddy Marrow",
         "Killer / Vance's personal physician",
-        "Bathroom",
+        "Living Room",
         "Calm, clinical, and slightly too helpful; quietly panics when faced with information he cannot safely ask about.",
+        "you'll falsely claim you were alone in the Bathroom treating a "
+        "headache -- a lie with no evidence behind it, and you get visibly "
+        "evasive if anyone tries to pin down the details",
     ),
     (
         "Wren",
         "Scapegoat #1 / Vance's granddaughter",
-        "Bedroom 1",
+        "Kitchen",
         "Broke, estranged, and defensive; she appears guilty because she lies about her arrival and was near the crime scene.",
+        "",
     ),
     (
         "Hettie",
         "Scapegoat #2 / housekeeper",
-        "Laundry Room",
+        "Kitchen",
         "Loyal, protective, and dutiful; she will tamper with a scene to shield someone she cares about.",
+        "",
     ),
     (
         "Odette",
         "Civilian (Chaos Agent) / rival game designer",
-        "Game Room",
+        "Bedroom",
         "Playful, provocative, and mischievous; she enjoys creating confusion and feeding misleading theories.",
+        "you can mention you were texting your assistant about a game-design "
+        "deadline -- the timestamped messages on your phone can prove "
+        "exactly where you were, even though no person saw you",
     ),
     (
         "Barnaby",
         "Civilian / Vance's old friend",
-        "Library",
+        "Bathroom",
         "Evasive, anxious, and suspicious-looking by accident; he is desperate to conceal an old financial scandal.",
+        "you can admit, reluctantly, that you were sick to your stomach from "
+        "nerves -- the housekeeper emptied the bin afterward and can "
+        "confirm it, embarrassing as that is to bring up",
     ),
     (
         "Colonel Slate",
         "Civilian / head of island security",
-        "Mudroom",
+        "Corridor",
         "Procedural, guarded, and a bad liar; disciplined, but protective of her private relationship with Hettie.",
+        "you can mention the Corridor's security camera caught you pacing "
+        "there at the time of death -- footage you could pull up to clear "
+        "yourself, though you don't offer it up eagerly",
     ),
 ]
 
@@ -78,16 +105,18 @@ def build_characters(house: dict[str, list[str]]) -> dict[str, list]:
 
     Returns:
         A dictionary mapping each character name to a list containing their
-        role, starting location, empty trust dictionary, and personality.
+        role, time-of-death location, empty trust dictionary, personality,
+        and alibi evidence.
     """
     characters: dict[str, list] = {}
 
-    for name, role, preferred_room, personality in CHARACTER_DEFINITIONS:
+    for name, role, preferred_room, personality, alibi_evidence in CHARACTER_DEFINITIONS:
         characters[name] = [
             role,
             _starting_location(house, preferred_room),
             {},  # No one is trusted at the start.
             personality,
+            alibi_evidence,
         ]
 
     return characters
@@ -102,7 +131,7 @@ if __name__ == "__main__":
 
     print("\nCharacters:")
     for name, details in characters.items():
-        role, location, trustedChars, personality = details
+        role, location, trustedChars, personality, alibi_evidence = details
         print(
             f"{name}: role={role}, location={location}, "
             f"trusts={trustedChars}, personality={personality}"

@@ -9,10 +9,11 @@ from __future__ import annotations
 
 # Static house definition
 STATIC_HOUSE = {
-    "Living Room": ["Kitchen", "Bedroom"],
-    "Kitchen": ["Living Room"],
-    "Bedroom": ["Living Room", "Bathroom"],
-    "Bathroom": ["Bedroom"]
+    "Corridor": ["Living Room", "Kitchen", "Bedroom", "Bathroom"],
+    "Living Room": ["Corridor", "Kitchen", "Bedroom"],
+    "Kitchen": ["Corridor", "Living Room"],
+    "Bedroom": ["Corridor", "Living Room", "Bathroom"],
+    "Bathroom": ["Corridor", "Bedroom"],
 }
 
 

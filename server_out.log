@@ -1,7 +1,0 @@
-INFO:     127.0.0.1:52125 - "GET / HTTP/1.1" 200 OK
-INFO:     127.0.0.1:52126 - "POST /game/start HTTP/1.1" 200 OK
-INFO:     127.0.0.1:52128 - "GET /main.js HTTP/1.1" 200 OK
-INFO:     127.0.0.1:52129 - "GET /styles.css HTTP/1.1" 200 OK
-INFO:     127.0.0.1:63019 - "POST /game/action HTTP/1.1" 422 Unprocessable Content
-INFO:     127.0.0.1:63020 - "GET /gm/state HTTP/1.1" 200 OK
-INFO:     127.0.0.1:63021 - "POST /game/action HTTP/1.1" 200 OK
