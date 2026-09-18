@@ -1,0 +1,77 @@
+{
+  "_comment": "Player-facing evidence board. Anchor clues duplicate public_canon.json's anchor_clues (safe: both are public). Supporting clues are discoverable via the 'examine' action and are designed to be, together, sufficient to identify the true murder room (Study), the true found/staged room (Library), the killer (Marrow), and the body-mover (Hettie) -- without ever stating the solution outright.",
+  "anchor_clues": [
+    {
+      "clue_id": "anchor_body_staged",
+      "category": "anchor",
+      "statement": "The body was staged. Post-mortem lividity and positioning are inconsistent with the Library, where Vance was found -- he was killed somewhere else and moved.",
+      "discovered_by_default": true,
+      "proves": ["The Library is not the true murder room; the body was moved there after death."]
+    },
+    {
+      "clue_id": "anchor_ammonite_missing",
+      "category": "anchor",
+      "statement": "Vance's prized Ammonite fossil -- the presumed murder weapon -- is missing from the house entirely and has been hidden somewhere on the island.",
+      "discovered_by_default": true,
+      "proves": ["The murder weapon is a specific, identifiable fossil.", "Whoever moved/hid it acted deliberately, after the killing."]
+    }
+  ],
+  "supporting_clues": [
+    {
+      "clue_id": "clue_camera_gap",
+      "category": "supporting",
+      "statement": "The Corridor's security camera has a roughly 35-minute gap in its footage that Saturday night, from about 9:30 to 10:05 PM.",
+      "discovery": "Examine the security log / ask Colonel Slate to review the footage.",
+      "proves": ["Someone could have moved unseen through the Corridor -- the only route between the Study, the Library, and the Storage Room -- during that window."]
+    },
+    {
+      "clue_id": "clue_drag_marks",
+      "category": "supporting",
+      "statement": "Faint drag marks and disturbed rug fibers run from the Study's threshold, through the Corridor, to the Library.",
+      "discovery": "Examine the Corridor and the Study floor closely.",
+      "proves": ["The body's actual path of movement was Study -> Corridor -> Library, pointing to the Study as the true murder room."]
+    },
+    {
+      "clue_id": "clue_wren_near_study",
+      "category": "supporting",
+      "statement": "Hettie recalls seeing Wren loitering near the Study a few minutes before the body was discovered.",
+      "discovery": "Question Hettie directly about her movements that night; requires at least mild pressure (T1).",
+      "proves": ["Wren was near the true murder room around the time of death.", "This is also the reason Hettie initially suspected Wren -- a red herring that later collapses."]
+    },
+    {
+      "clue_id": "clue_wren_arrival_discrepancy",
+      "category": "supporting",
+      "statement": "Wren's claimed arrival time on the island doesn't match the dock/boat log -- she arrived earlier than she says.",
+      "discovery": "Cross-reference Wren's statement against the dock log.",
+      "proves": ["Wren lied about something that night, but it is about her own desperate finances and a lawyer contacted about the will -- not about the murder itself.", "Once explained, this clears rather than convicts her."]
+    },
+    {
+      "clue_id": "clue_trial_ledger",
+      "category": "supporting",
+      "statement": "The research trial's financial ledger, which Marrow managed, shows discrepancies consistent with skimmed funds.",
+      "discovery": "Examine Vance's study desk or financial records / present to Marrow as evidence.",
+      "proves": ["Marrow had a concrete financial motive to silence Vance."]
+    },
+    {
+      "clue_id": "clue_sedative_vial",
+      "category": "supporting",
+      "statement": "A partially used sedative vial in Marrow's medical bag shows a dosage inconsistent with Vance's actual prescription.",
+      "discovery": "Examine Marrow's medical bag (requires cause / evidence pressure).",
+      "proves": ["Marrow had been secretly over-medicating Vance -- corroborating the embezzlement cover-up motive."]
+    },
+    {
+      "clue_id": "clue_wax_trace",
+      "category": "supporting",
+      "statement": "A smear of the Study's display-case wax/polish is found on Hettie's apron, inconsistent with her stated whereabouts that night.",
+      "discovery": "Examine Hettie's apron / present as evidence to Hettie.",
+      "proves": ["Hettie was physically in the Study that night, contradicting her claimed movements -- evidence pressure toward her T2 secret."]
+    },
+    {
+      "clue_id": "clue_storage_room_scuffs",
+      "category": "supporting",
+      "statement": "The Storage Room's usually undisturbed dust is freshly scuffed, and its door -- normally kept locked -- was found unlatched.",
+      "discovery": "Examine the Storage Room.",
+      "proves": ["Someone entered the Storage Room recently and deliberately, hinting at where the Ammonite might be without confirming it outright."]
+    }
+  ]
+}
