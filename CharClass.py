@@ -10,6 +10,10 @@ the story trusting no one.
 
 from House_Generator import generate_house
 
+# 
+
+
+
 
 # Add or remove characters here. Each entry is:
 # (character name, role, preferred starting room, personality description)
@@ -98,8 +102,8 @@ if __name__ == "__main__":
 
     print("\nCharacters:")
     for name, details in characters.items():
-        role, location, trusts, personality = details
+        role, location, trustedChars, personality = details
         print(
             f"{name}: role={role}, location={location}, "
-            f"trusts={trusts}, personality={personality}"
+            f"trusts={trustedChars}, personality={personality}"
         )
