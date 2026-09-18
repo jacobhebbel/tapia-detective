@@ -293,5 +293,6 @@ Built for the **Tapia Conference Hackathon** by:
 - [@Cashmin](https://github.com/Cashmin)
 - [@cenjingwang](https://github.com/cenjingwang)
 - [@Ameyabarve123](https://github.com/Ameyabarve123)
+- [@cindy-muniz](https://github.com/cindy-muniz)
 
 Licensed under the terms in [`LICENSE`](LICENSE).
